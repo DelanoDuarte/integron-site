@@ -5,12 +5,13 @@ import Base from '../layouts/Base.astro'
 
   <!-- ── Nav ─────────────────────────────────────────────────────────── -->
   <header class="sticky top-0 z-50 border-b border-black/5 bg-white/80 backdrop-blur dark:border-white/10 dark:bg-brand-ink/80">
-    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
       <a href="/" aria-label="Integron">
-        <img src="/brand/integron-logo.svg" alt="Integron" class="h-7 w-auto dark:hidden" />
-        <img src="/brand/integron-logo-dark.svg" alt="Integron" class="hidden h-7 w-auto dark:block" />
+        <img src="/brand/integron-logo.svg" alt="Integron" class="h-10 w-auto dark:hidden" />
+        <img src="/brand/integron-logo-dark.svg" alt="Integron" class="hidden h-10 w-auto dark:block" />
       </a>
       <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300 md:flex">
+        <a href="#o-problema" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">O Problema</a>
         <a href="#funcionalidades" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Funcionalidades</a>
         <a href="#como-funciona" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Como funciona</a>
         <a href="#precos" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Preços</a>
@@ -41,30 +42,46 @@ import Base from '../layouts/Base.astro'
     <div class="relative mx-auto max-w-4xl">
       <span class="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5 text-sm font-medium text-brand-700 dark:border-brand-800 dark:bg-brand-900/40 dark:text-brand-300">
         <span class="size-1.5 rounded-full bg-brand-500"></span>
-        Conformidade fiscal para a Reforma Tributária
+        Preparado para IBS e CBS — Reforma Tributária 2026/2027
       </span>
       <h1 class="mt-6 text-4xl font-extrabold tracking-tight text-brand-ink dark:text-white md:text-6xl">
-        Pare de enviar<br />
-        <span class="text-brand-600 dark:text-brand-400">NF-e com erros</span>
+        Uma NF-e rejeitada não é<br class="hidden md:block" />
+        <span class="text-brand-600 dark:text-brand-400">só um erro. É dinheiro parado.</span>
       </h1>
       <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
-        O Integron valida NCM, CFOP, GTIN, IBS e CBS antes da transmissão à SEFAZ —
-        direto do seu ERP. Chega de rejeições, multas e correções manuais.
+        Caminhão parado na doca. Capital de giro bloqueado. Multa de até 100% do valor da operação.
+        O Integron valida NCM, CFOP, GTIN, IBS e CBS <strong class="text-brand-ink dark:text-white">antes</strong> de você transmitir à SEFAZ —
+        para que nenhum desses problemas aconteça.
       </p>
       <div class="mt-10 flex flex-wrap justify-center gap-4">
         <a href="#contato"
           class="rounded-xl bg-brand-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-brand-600/20 hover:bg-brand-700 transition-colors">
-          Solicitar demo gratuita
+          Solicitar diagnóstico gratuito
         </a>
-        <a href="#como-funciona"
+        <a href="#o-problema"
           class="rounded-xl border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 hover:border-slate-400 dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 transition-colors">
-          Ver como funciona →
+          Ver o custo real →
         </a>
+      </div>
+      <!-- hero stats -->
+      <div class="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 dark:border-white/10 dark:bg-white/10 sm:grid-cols-3">
+        <div class="bg-white px-8 py-7 dark:bg-brand-ink">
+          <p class="text-3xl font-extrabold text-brand-600 dark:text-brand-400">até 100%</p>
+          <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">do valor da operação em multa por NF-e sem cobertura fiscal</p>
+        </div>
+        <div class="bg-white px-8 py-7 dark:bg-brand-ink">
+          <p class="text-3xl font-extrabold text-brand-600 dark:text-brand-400">1–3 h</p>
+          <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">de um analista fiscal para corrigir cada rejeição manualmente</p>
+        </div>
+        <div class="bg-white px-8 py-7 dark:bg-brand-ink">
+          <p class="text-3xl font-extrabold text-brand-600 dark:text-brand-400">R$ 200 mil</p>
+          <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">de capital de giro bloqueado em 48 h para quem fatura R$ 10 M/mês</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Social proof strip ──────────────────────────────────────────── -->
+  <!-- ── ERP strip ─────────────────────────────────────────────────────── -->
   <div class="border-y border-slate-100 bg-slate-50 px-6 py-5 dark:border-white/5 dark:bg-white/5">
     <p class="text-center text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">
       Integra com os principais ERPs do mercado brasileiro
@@ -79,8 +96,124 @@ import Base from '../layouts/Base.astro'
     </div>
   </div>
 
+  <!-- ── Pain points ───────────────────────────────────────────────────── -->
+  <section id="o-problema" class="px-6 py-24">
+    <div class="mx-auto max-w-6xl">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold tracking-tight text-brand-ink dark:text-white md:text-4xl">
+          O custo real de uma NF-e rejeitada
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-500 dark:text-slate-400">
+          A maioria das empresas só conta a multa. O prejuízo real é três vezes maior — e quase sempre invisível no balanço.
+        </p>
+      </div>
+
+      <div class="mt-16 grid gap-8 lg:grid-cols-3">
+
+        <!-- Pain 1: Fines -->
+        <div class="relative rounded-2xl border border-red-100 bg-red-50 p-8 dark:border-red-900/40 dark:bg-red-950/20">
+          <div class="flex size-12 items-center justify-center rounded-xl bg-red-100 dark:bg-red-900/40">
+            <svg class="size-6 text-red-600 dark:text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            </svg>
+          </div>
+          <h3 class="mt-5 text-xl font-bold text-brand-ink dark:text-white">Multas do Fisco</h3>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            Uma NF-e rejeitada inicia um relógio legal. Se a empresa não reemitir dentro do prazo estadual,
+            a operação fica sem cobertura fiscal — e as penalidades chegam.
+          </p>
+          <div class="mt-6 rounded-xl bg-white p-5 dark:bg-brand-ink/60">
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Exemplo real — São Paulo</p>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
+              Um caminhão com <strong class="text-brand-ink dark:text-white">R$ 80.000 em mercadorias</strong> sem
+              NF-e autorizada pode gerar uma multa de <strong class="text-red-600 dark:text-red-400">R$ 40.000</strong> só
+              em São Paulo (Art. 527 RICMS/SP) — antes do frete, armazenagem e custos jurídicos.
+            </p>
+            <p class="mt-3 text-xs text-slate-500 dark:text-slate-400">
+              Penalidade geral: <span class="font-semibold text-red-500">10 % – 100 %</span> do valor da operação.
+            </p>
+          </div>
+          <p class="mt-4 text-xs text-slate-500 dark:text-slate-400">
+            Com a Reforma Tributária, campos IBS/CBS são obrigatórios a partir de agosto de 2026.
+            Cada campo ausente ou errado é um novo gatilho de rejeição.
+          </p>
+        </div>
+
+        <!-- Pain 2: Rework -->
+        <div class="relative rounded-2xl border border-amber-100 bg-amber-50 p-8 dark:border-amber-900/40 dark:bg-amber-950/20">
+          <div class="flex size-12 items-center justify-center rounded-xl bg-amber-100 dark:bg-amber-900/40">
+            <svg class="size-6 text-amber-600 dark:text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="mt-5 text-xl font-bold text-brand-ink dark:text-white">Retrabalho operacional</h3>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            Cada rejeição força um ciclo manual: identificar o código SEFAZ, localizar a nota no ERP,
+            encontrar o campo errado, corrigir em múltiplos sistemas e reenviar. Um ciclo que se repete centenas de vezes por semana.
+          </p>
+          <div class="mt-6 space-y-3">
+            {['Identificar o código de rejeição SEFAZ (série 500)', 'Localizar a nota no ERP', 'Corrigir em ERP, tabela fiscal e cadastro de cliente', 'Reenviar e confirmar autorização'].map((step, i) => (
+              <div class="flex items-start gap-3">
+                <span class="flex size-5 shrink-0 items-center justify-center rounded-full bg-amber-200 text-[11px] font-bold text-amber-800 dark:bg-amber-900/60 dark:text-amber-300">{i + 1}</span>
+                <p class="text-sm text-slate-600 dark:text-slate-300">{step}</p>
+              </div>
+            ))}
+          </div>
+          <div class="mt-6 rounded-xl bg-white p-4 dark:bg-brand-ink/60">
+            <p class="text-sm text-slate-600 dark:text-slate-300">
+              Estimativa do setor: <strong class="text-amber-600 dark:text-amber-400">1–3 horas</strong> de um analista fiscal
+              por rejeição. Com 50 rejeições diárias — comum durante a migração IBS/CBS —
+              são <strong class="text-amber-600 dark:text-amber-400">50–150 horas/dia</strong> de firefighting
+              em vez de conformidade estratégica.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pain 3: Cascade -->
+        <div class="relative rounded-2xl border border-orange-100 bg-orange-50 p-8 dark:border-orange-900/40 dark:bg-orange-950/20">
+          <div class="flex size-12 items-center justify-center rounded-xl bg-orange-100 dark:bg-orange-900/40">
+            <svg class="size-6 text-orange-600 dark:text-orange-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="mt-5 text-xl font-bold text-brand-ink dark:text-white">A cascata que ninguém conta</h3>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            O maior prejuízo raramente é a multa. É a parada operacional que se propaga pelo negócio inteiro.
+          </p>
+          <div class="mt-6 space-y-4">
+            <div class="rounded-xl bg-white p-4 dark:bg-brand-ink/60">
+              <p class="text-xs font-semibold text-orange-600 dark:text-orange-400">Caminhão parado na doca</p>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Mercadorias não transitam sem NF-e autorizada. Cada hora parada é frete, hora extra do motorista e SLA de entrega perdido.</p>
+            </div>
+            <div class="rounded-xl bg-white p-4 dark:bg-brand-ink/60">
+              <p class="text-xs font-semibold text-orange-600 dark:text-orange-400">Capital de giro bloqueado</p>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Clientes só pagam após receber o documento fiscal. Para quem fatura R$ 10 M/mês, 2% de notas paradas por 48 h bloqueiam <strong class="text-orange-600 dark:text-orange-400">R$ 200.000</strong> em capital.</p>
+            </div>
+            <div class="rounded-xl bg-white p-4 dark:bg-brand-ink/60">
+              <p class="text-xs font-semibold text-orange-600 dark:text-orange-400">Créditos IBS/CBS perdidos</p>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Compradores B2B precisam de notas limpas para apropriar seus próprios créditos. Fornecedores com má higiene fiscal perdem clientes — primeiro informalmente, depois contratualmente.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bridge to solution -->
+      <div class="mt-16 rounded-2xl bg-brand-600 p-8 text-center text-white md:p-12">
+        <h3 class="text-2xl font-extrabold md:text-3xl">O Integron resolve os três camadas</h3>
+        <p class="mx-auto mt-4 max-w-2xl text-brand-100">
+          Validação antes da transmissão elimina as multas. O relatório de diagnóstico reduz o retrabalho de horas para minutos.
+          Monitoramento em tempo real interrompe a cascata operacional em até 5 minutos da emissão.
+        </p>
+        <a href="#funcionalidades" class="mt-8 inline-block rounded-xl bg-white px-6 py-3 text-sm font-semibold text-brand-700 hover:bg-brand-50 transition-colors">
+          Ver como funciona →
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Features ─────────────────────────────────────────────────────── -->
-  <section id="funcionalidades" class="px-6 py-24">
+  <section id="funcionalidades" class="bg-slate-50 px-6 py-24 dark:bg-white/5">
     <div class="mx-auto max-w-6xl">
       <div class="text-center">
         <h2 class="text-3xl font-extrabold tracking-tight text-brand-ink dark:text-white md:text-4xl">
@@ -91,100 +224,100 @@ import Base from '../layouts/Base.astro'
         </p>
       </div>
       <div class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-brand-ink">
           <div class="flex size-11 items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-900/40">
             <svg class="size-5 text-brand-600 dark:text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
             </svg>
           </div>
-          <h3 class="mt-4 text-base font-semibold text-brand-ink dark:text-white">Validação antes da SEFAZ</h3>
-          <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Detecta erros de NCM, CFOP, GTIN, IBS/CBS e CSOSN antes de você transmitir. Zero rejeições desnecessárias.</p>
+          <h3 class="mt-4 text-base font-semibold text-brand-ink dark:text-white">Validação pré-SEFAZ</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">NCM, CFOP, GTIN, IBS/CBS e CSOSN verificados antes da transmissão. Erros viram sugestões de correção — não códigos 5xx da SEFAZ.</p>
         </div>
-        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-brand-ink">
           <div class="flex size-11 items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-900/40">
             <svg class="size-5 text-brand-600 dark:text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
             </svg>
           </div>
           <h3 class="mt-4 text-base font-semibold text-brand-ink dark:text-white">Relatório de diagnóstico</h3>
-          <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Upload de XML ou monitor via SFTP. Cada nota gera um diagnóstico detalhado com severidade e sugestão de correção.</p>
+          <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Upload de XML ou monitor SFTP. Cada nota gera um diagnóstico por produto com campo errado, valor atual, valor sugerido e código de rejeição provável.</p>
         </div>
-        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-brand-ink">
           <div class="flex size-11 items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-900/40">
             <svg class="size-5 text-brand-600 dark:text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
             </svg>
           </div>
-          <h3 class="mt-4 text-base font-semibold text-brand-ink dark:text-white">Alertas inteligentes</h3>
-          <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Fila de trabalho com alertas priorizados por risco. A equipe fiscal foca no que importa — não em varrer planilhas.</p>
+          <h3 class="mt-4 text-base font-semibold text-brand-ink dark:text-white">Alertas por papel</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Rejeições detectadas em até 5 minutos. Erros de campo vão para o time fiscal; impacto em receita vai para o CFO. A pessoa certa age na hora certa.</p>
         </div>
-        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-brand-ink">
           <div class="flex size-11 items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-900/40">
             <svg class="size-5 text-brand-600 dark:text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 3.79 8 4"/>
             </svg>
           </div>
-          <h3 class="mt-4 text-base font-semibold text-brand-ink dark:text-white">Regras da Reforma Tributária</h3>
-          <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Já preparado para IBS, CBS e o novo regime dual. Atualizações de regras sem redeploy — via configuração.</p>
+          <h3 class="mt-4 text-base font-semibold text-brand-ink dark:text-white">Regras IBS/CBS prontas</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Já preparado para o novo regime dual. Campos IBS/CBS obrigatórios a partir de agosto de 2026 — o Integron já valida hoje, antes do prazo.</p>
         </div>
-        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-brand-ink">
           <div class="flex size-11 items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-900/40">
             <svg class="size-5 text-brand-600 dark:text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               <path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
             </svg>
           </div>
-          <h3 class="mt-4 text-base font-semibold text-brand-ink dark:text-white">Integração via API ou SFTP</h3>
-          <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">API REST síncrona para pre-flight inline no ERP. SFTP para lote. Webhook para notificações. Sem vendor lock-in.</p>
+          <h3 class="mt-4 text-base font-semibold text-brand-ink dark:text-white">API síncrona ou SFTP</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Pre-flight inline no ERP via API REST em milissegundos. SFTP para lote. Sem mudança de sistema, sem vendor lock-in.</p>
         </div>
-        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-brand-ink">
           <div class="flex size-11 items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-900/40">
             <svg class="size-5 text-brand-600 dark:text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
             </svg>
           </div>
           <h3 class="mt-4 text-base font-semibold text-brand-ink dark:text-white">Segurança enterprise</h3>
-          <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Credenciais criptografadas AES-256-GCM. CNPJs mascarados. Acesso auditado. Conformidade LGPD desde o design.</p>
+          <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Credenciais AES-256-GCM. CNPJs mascarados. Acesso auditado. LGPD desde o design — sem atalhos.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ── How it works ──────────────────────────────────────────────────── -->
-  <section id="como-funciona" class="bg-brand-50 px-6 py-24 dark:bg-brand-900/20">
+  <section id="como-funciona" class="px-6 py-24">
     <div class="mx-auto max-w-4xl">
       <h2 class="text-center text-3xl font-extrabold tracking-tight text-brand-ink dark:text-white md:text-4xl">
         Em produção em menos de um dia
       </h2>
       <p class="mt-4 text-center text-lg text-slate-500 dark:text-slate-400">
-        Sem troca de ERP, sem mudança de processo. O Integron se encaixa no que você já tem.
+        Sem trocar de ERP, sem mudar processo. O Integron se encaixa no que você já tem.
       </p>
       <div class="mt-14 space-y-8">
         <div class="flex gap-5">
           <div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">1</div>
           <div>
             <h3 class="text-base font-semibold text-brand-ink dark:text-white">Conecte seu ERP</h3>
-            <p class="mt-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Cadastre o ambiente (Protheus, SAP, Oracle ou outro) e a credencial de acesso em menos de 5 minutos.</p>
+            <p class="mt-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Cadastre o ambiente (Protheus, SAP, Oracle ou qualquer outro) e a credencial de acesso em menos de 5 minutos.</p>
           </div>
         </div>
         <div class="flex gap-5">
           <div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">2</div>
           <div>
             <h3 class="text-base font-semibold text-brand-ink dark:text-white">Envie as notas</h3>
-            <p class="mt-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Faça upload manual de XML, configure um watcher SFTP ou chame a API síncrona direto do seu ERP antes de transmitir.</p>
+            <p class="mt-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Upload manual de XML, watcher SFTP automático, ou chamada à API síncrona diretamente do ERP — antes de transmitir à SEFAZ.</p>
           </div>
         </div>
         <div class="flex gap-5">
           <div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">3</div>
           <div>
             <h3 class="text-base font-semibold text-brand-ink dark:text-white">Receba o diagnóstico</h3>
-            <p class="mt-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Cada nota retorna um score de risco, lista de achados com severidade e sugestão de correção — em milissegundos.</p>
+            <p class="mt-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">Cada nota retorna score de risco, lista de achados com severidade, campo errado, valor sugerido e código de rejeição provável — tudo em milissegundos.</p>
           </div>
         </div>
         <div class="flex gap-5">
           <div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">4</div>
           <div>
-            <h3 class="text-base font-semibold text-brand-ink dark:text-white">Corrija e transmita</h3>
-            <p class="mt-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">O time fiscal resolve os alertas pela fila de trabalho. A SEFAZ nunca vê uma nota com erro.</p>
+            <h3 class="text-base font-semibold text-brand-ink dark:text-white">Corrija antes de transmitir</h3>
+            <p class="mt-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">O time fiscal resolve os achados pela fila de trabalho. Um analista corrige 50 produtos no tempo que levava para corrigir um. A SEFAZ nunca vê uma nota com erro.</p>
           </div>
         </div>
       </div>
@@ -192,7 +325,7 @@ import Base from '../layouts/Base.astro'
   </section>
 
   <!-- ── Pricing ───────────────────────────────────────────────────────── -->
-  <section id="precos" class="px-6 py-24">
+  <section id="precos" class="bg-slate-50 px-6 py-24 dark:bg-white/5">
     <div class="mx-auto max-w-6xl">
       <h2 class="text-center text-3xl font-extrabold tracking-tight text-brand-ink dark:text-white md:text-4xl">
         Preços simples, sem surpresas
@@ -202,12 +335,12 @@ import Base from '../layouts/Base.astro'
       </p>
       <div class="mt-14 grid gap-8 md:grid-cols-3">
 
-        <div class="rounded-2xl border border-slate-200 bg-white p-8 dark:border-white/10 dark:bg-white/5">
+        <div class="rounded-2xl border border-slate-200 bg-white p-8 dark:border-white/10 dark:bg-brand-ink">
           <p class="text-sm font-semibold text-brand-600 dark:text-brand-400">Starter</p>
           <p class="mt-2 text-4xl font-extrabold text-brand-ink dark:text-white">R$ 490<span class="text-base font-medium text-slate-400">/mês</span></p>
           <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Para empresas com até 5.000 NF-e/mês e uma filial.</p>
           <ul class="mt-6 space-y-3">
-            {['Diagnóstico via upload XML', 'Relatório de achados', 'Validação XSD + 6 regras fiscais', 'Suporte por e-mail'].map(f => (
+            {['Diagnóstico via upload XML', 'Relatório de achados por produto', 'Validação XSD + 6 regras fiscais', 'Suporte por e-mail'].map(f => (
               <li class="flex items-start gap-2.5 text-sm">
                 <svg class="mt-0.5 size-4 shrink-0 text-brand-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                 <span class="text-slate-600 dark:text-slate-300">{f}</span>
@@ -218,11 +351,11 @@ import Base from '../layouts/Base.astro'
         </div>
 
         <div class="rounded-2xl border border-brand-600 bg-brand-600 p-8 shadow-xl shadow-brand-600/25 text-white">
-          <p class="text-sm font-semibold text-brand-100">Business</p>
+          <p class="text-sm font-semibold text-brand-100">Business <span class="ml-2 rounded-full bg-white/20 px-2 py-0.5 text-xs">Mais popular</span></p>
           <p class="mt-2 text-4xl font-extrabold">R$ 1.490<span class="text-base font-medium text-brand-200">/mês</span></p>
-          <p class="mt-3 text-sm text-brand-100">Para operações com múltiplos CNPJs e integração ERP.</p>
+          <p class="mt-3 text-sm text-brand-100">Para operações com múltiplos CNPJs e integração direta ao ERP.</p>
           <ul class="mt-6 space-y-3">
-            {['Tudo do Starter', 'API de pre-flight síncrona', 'SFTP watcher ilimitado', 'Score de risco de rejeição', 'Suporte prioritário'].map(f => (
+            {['Tudo do Starter', 'API de pre-flight síncrona', 'SFTP watcher ilimitado', 'Score de risco de rejeição', 'Dashboard CFO com R$ em risco', 'Suporte prioritário'].map(f => (
               <li class="flex items-start gap-2.5 text-sm">
                 <svg class="mt-0.5 size-4 shrink-0 text-brand-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                 <span class="text-brand-50">{f}</span>
@@ -232,12 +365,12 @@ import Base from '../layouts/Base.astro'
           <a href="#contato" class="mt-8 block w-full rounded-xl bg-white px-4 py-3 text-center text-sm font-semibold text-brand-700 hover:bg-brand-50 transition-colors">Falar com vendas</a>
         </div>
 
-        <div class="rounded-2xl border border-slate-200 bg-white p-8 dark:border-white/10 dark:bg-white/5">
+        <div class="rounded-2xl border border-slate-200 bg-white p-8 dark:border-white/10 dark:bg-brand-ink">
           <p class="text-sm font-semibold text-brand-600 dark:text-brand-400">Enterprise</p>
           <p class="mt-2 text-4xl font-extrabold text-brand-ink dark:text-white">Sob consulta</p>
-          <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Para grupos empresariais e consultorias fiscais.</p>
+          <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Para grupos empresariais e consultorias fiscais que revendem o diagnóstico.</p>
           <ul class="mt-6 space-y-3">
-            {['Tudo do Business', 'SLA garantido', 'Regras personalizadas', 'SSO / LDAP', 'Onboarding dedicado'].map(f => (
+            {['Tudo do Business', 'SLA garantido em contrato', 'Regras fiscais personalizadas', 'SSO / LDAP', 'Onboarding e diagnóstico dedicados'].map(f => (
               <li class="flex items-start gap-2.5 text-sm">
                 <svg class="mt-0.5 size-4 shrink-0 text-brand-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                 <span class="text-slate-600 dark:text-slate-300">{f}</span>
@@ -256,20 +389,21 @@ import Base from '../layouts/Base.astro'
     <div class="mx-auto max-w-2xl text-center">
       <img src="/brand/integron-mark-dark.svg" alt="" aria-hidden="true" class="mx-auto mb-8 h-14 w-auto" />
       <h2 class="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-        Pronto para eliminar rejeições?
+        Veja o Integron nos seus dados
       </h2>
       <p class="mt-4 text-lg text-brand-300">
-        Fale com nossa equipe e veja o Integron funcionando com os dados da sua empresa em 30 minutos.
+        Exporte o cadastro de produtos do seu ERP e uma amostra de XML. Em 30 minutos
+        você tem um relatório mostrando quantas notas teriam sido rejeitadas — e o R$ em risco.
       </p>
       <form class="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center"
         action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_KEY" />
-        <input type="hidden" name="subject" value="Demo — Integron" />
+        <input type="hidden" name="subject" value="Diagnóstico gratuito — Integron" />
         <input type="email" name="email" required placeholder="seu@empresa.com.br"
           class="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400 sm:w-72" />
         <button type="submit"
           class="rounded-xl bg-brand-500 px-6 py-3 text-sm font-semibold text-white hover:bg-brand-400 transition-colors whitespace-nowrap">
-          Solicitar demo
+          Solicitar diagnóstico
         </button>
       </form>
       <p class="mt-4 text-xs text-brand-500">Sem cartão de crédito. Resposta em até 1 dia útil.</p>
@@ -279,12 +413,13 @@ import Base from '../layouts/Base.astro'
   <!-- ── Footer ───────────────────────────────────────────────────────── -->
   <footer class="border-t border-slate-100 px-6 py-10 dark:border-white/10">
     <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6">
-      <img src="/brand/integron-logo.svg" alt="Integron" class="h-6 w-auto dark:hidden" />
-      <img src="/brand/integron-logo-dark.svg" alt="Integron" class="hidden h-6 w-auto dark:block" />
+      <img src="/brand/integron-logo.svg" alt="Integron" class="h-7 w-auto dark:hidden" />
+      <img src="/brand/integron-logo-dark.svg" alt="Integron" class="hidden h-7 w-auto dark:block" />
       <p class="text-xs text-slate-400 dark:text-slate-500">
         © {new Date().getFullYear()} Integron. Todos os direitos reservados.
       </p>
       <nav class="flex gap-6 text-xs text-slate-400 dark:text-slate-500">
+        <a href="#o-problema" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">O Problema</a>
         <a href="#funcionalidades" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Funcionalidades</a>
         <a href="#precos" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Preços</a>
         <a href="#contato" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Contato</a>
