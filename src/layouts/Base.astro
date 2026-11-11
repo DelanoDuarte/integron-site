@@ -1,0 +1,48 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = 'Integron — Conformidade Fiscal para o Brasil Moderno',
+  description = 'Detecte riscos em NF-e antes da transmissão. Validação automática de NCM, CFOP, GTIN e regras IBS/CBS para empresas que não podem errar.',
+} = Astro.props
+---
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+
+  <!-- Favicons & PWA -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#10241A" media="(prefers-color-scheme: dark)" />
+
+  <!-- Dark mode: runs before paint to avoid FOUC -->
+  <script src="/js/theme.js" is:inline></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- OG / Social -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/brand/integron-logo@2x.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+</head>
+<body class="bg-white font-sans text-brand-ink antialiased dark:bg-brand-ink dark:text-white">
+  <slot />
+</body>
+</html>

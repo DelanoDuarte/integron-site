@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* Class-based dark mode — driven by /js/theme.js */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-50:  #ECF8F1;
+  --color-brand-100: #D1EFDD;
+  --color-brand-200: #A5DFBE;
+  --color-brand-300: #6FC896;
+  --color-brand-400: #36A96C;
+  --color-brand-500: #178F55;
+  --color-brand-600: #0F7A4A;
+  --color-brand-700: #0D6340;
+  --color-brand-800: #0D4F34;
+  --color-brand-900: #0C3F2B;
+  --color-brand-ink: #10241A;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+}
