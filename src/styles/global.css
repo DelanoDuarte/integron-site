@@ -4,23 +4,69 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-brand-50:  #ECF8F1;
-  --color-brand-100: #D1EFDD;
-  --color-brand-200: #A5DFBE;
-  --color-brand-300: #6FC896;
-  --color-brand-400: #36A96C;
-  --color-brand-500: #178F55;
-  --color-brand-600: #0F7A4A;
-  --color-brand-700: #0D6340;
-  --color-brand-800: #0D4F34;
-  --color-brand-900: #0C3F2B;
-  --color-brand-ink: #10241A;
+  --color-brand-50:  #F2F1ED;
+  --color-brand-100: #DAD7CD;
+  --color-brand-200: #BEC6AA;
+  --color-brand-300: #A3B18A;
+  --color-brand-400: #769B6E;
+  --color-brand-500: #588157;
+  --color-brand-600: #4A6E49;
+  --color-brand-700: #3A5A40;
+  --color-brand-800: #344E41;
+  --color-brand-900: #263A30;
+  --color-brand-ink: #1A2922;
 
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
 }
 
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
   }
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay, 0ms);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .animate-fade-up {
+    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-brand-700) 0%, var(--color-brand-500) 60%, var(--color-brand-400) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .dot-grid {
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--color-brand-300) 35%, transparent) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .dark .dot-grid {
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--color-brand-700) 40%, transparent) 1px, transparent 1px);
+  }
+  .card-glow {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-brand-200) 60%, transparent),
+                0 4px 24px -4px color-mix(in srgb, var(--color-brand-700) 12%, transparent);
+  }
+  .dark .card-glow {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-brand-700) 50%, transparent),
+                0 4px 24px -4px color-mix(in srgb, var(--color-brand-900) 60%, transparent);
+  }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
