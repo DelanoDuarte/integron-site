@@ -601,18 +601,46 @@ import Base from '../layouts/Base.astro'
         Exporte o cadastro de produtos do seu ERP e uma amostra de XML. Em 30 minutos
         você tem um relatório mostrando quantas notas teriam sido rejeitadas — e o R$ em risco.
       </p>
-      <form class="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center reveal"
-        action="https://api.web3forms.com/submit" method="POST" style="--delay: 160ms">
-        <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_KEY" />
+      <form id="contact-form" class="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center reveal" style="--delay: 160ms">
+        <input type="hidden" name="access_key" value="096daf19-ddb7-446a-ba2d-2078a0244762" />
         <input type="hidden" name="subject" value="Diagnóstico gratuito — Integron" />
         <input type="email" name="email" required placeholder="seu@empresa.com.br"
           class="w-full rounded-lg border border-white/15 bg-white/10 px-4 py-2.5 text-sm text-white placeholder:text-brand-400 focus:border-brand-400 focus:outline-none focus:ring-1 focus:ring-brand-400 sm:w-72" />
-        <button type="submit"
-          class="rounded-lg bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-400 transition-colors whitespace-nowrap">
+        <button type="submit" id="contact-submit"
+          class="rounded-lg bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-400 transition-colors whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed">
           Solicitar diagnóstico
         </button>
       </form>
-      <p class="mt-4 text-xs text-brand-600 reveal" style="--delay: 220ms">Sem cartão de crédito. Resposta em até 1 dia útil.</p>
+      <div id="contact-result" class="mt-3 text-sm reveal hidden" style="--delay: 220ms"></div>
+      <p class="mt-3 text-xs text-brand-600 reveal" style="--delay: 220ms">Sem cartão de crédito. Resposta em até 1 dia útil.</p>
+
+      <script>
+        const form = document.getElementById('contact-form') as HTMLFormElement
+        const btn  = document.getElementById('contact-submit') as HTMLButtonElement
+        const result = document.getElementById('contact-result') as HTMLElement
+
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault()
+          btn.disabled = true
+          btn.textContent = 'Enviando…'
+          result.className = 'mt-3 text-sm'
+
+          const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) })
+          const data = await res.json()
+
+          if (data.success) {
+            result.textContent = '✓ Recebemos seu contato! Retornamos em até 1 dia útil.'
+            result.classList.add('text-brand-300')
+            form.reset()
+            btn.textContent = 'Enviado'
+          } else {
+            result.textContent = data.message ?? 'Algo deu errado. Tente novamente.'
+            result.classList.add('text-red-400')
+            btn.disabled = false
+            btn.textContent = 'Solicitar diagnóstico'
+          }
+        })
+      </script>
     </div>
   </section>
 
