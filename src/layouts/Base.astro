@@ -39,7 +39,7 @@ const {
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="/brand/integron-logo@2x.png" />
+  <meta property="og:image" content={new URL('/brand/integron-logo@2x.png', Astro.site).href} />
   <meta name="twitter:card" content="summary_large_image" />
 </head>
 <body class="bg-white font-sans text-brand-ink antialiased dark:bg-brand-ink dark:text-white">
