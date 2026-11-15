@@ -58,12 +58,6 @@ import Base from '../layouts/Base.astro'
             Como funciona →
           </a>
         </div>
-        <div class="mt-6 flex flex-wrap justify-center items-center gap-x-5 gap-y-1.5 animate-fade-up" style="animation-delay: 320ms">
-          <span class="text-xs text-slate-400 dark:text-slate-500">Integra com:</span>
-          {['TOTVS Protheus', 'SAP S/4HANA', 'Oracle EBS', 'Sankhya', 'Senior'].map(e => (
-            <span class="text-xs font-medium text-slate-400 dark:text-slate-500">{e}</span>
-          ))}
-        </div>
       </div>
 
       <!-- Product mockup (centered, below CTAs) -->
@@ -173,6 +167,35 @@ import Base from '../layouts/Base.astro'
         <!-- Fade mockup into next section -->
         <div aria-hidden="true" class="pointer-events-none absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-white to-transparent dark:from-brand-ink"></div>
       </div>
+    </div>
+  </section>
+
+  <!-- ── Integrations strip ──────────────────────────────────────────────── -->
+  <section class="border-b border-slate-100 bg-white px-6 py-12 dark:border-white/5 dark:bg-brand-ink">
+    <div class="mx-auto max-w-5xl">
+      <p class="mb-8 text-center text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 reveal">
+        Integra com os principais ERPs do mercado brasileiro
+      </p>
+      <div class="flex flex-wrap justify-center gap-3 reveal" style="--delay: 80ms">
+        {[
+          { name: 'TOTVS Protheus',  note: 'v12 · REST & SFTP' },
+          { name: 'SAP S/4HANA',     note: 'OData & SFTP'      },
+          { name: 'Oracle EBS',      note: 'REST API'           },
+          { name: 'Sankhya',         note: 'SDK REST'           },
+          { name: 'Senior Sistemas', note: 'REST API'           },
+        ].map(e => (
+          <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-5 py-3.5 shadow-sm transition-shadow hover:shadow-md dark:border-brand-700/40 dark:bg-brand-800/60">
+            <span class="size-2 shrink-0 rounded-full bg-brand-500"></span>
+            <div>
+              <p class="font-heading text-sm font-semibold text-slate-800 dark:text-slate-100">{e.name}</p>
+              <p class="text-[10px] text-slate-400 dark:text-slate-500">{e.note}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-center text-xs text-slate-400 dark:text-slate-500 reveal" style="--delay: 160ms">
+        Integração via API REST ou monitor SFTP — sem instalar agente no servidor do ERP
+      </p>
     </div>
   </section>
 
