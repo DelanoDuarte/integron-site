@@ -41,6 +41,28 @@ const {
   <meta property="og:type" content="website" />
   <meta property="og:image" content={new URL('/brand/integron-logo@2x.png', Astro.site).href} />
   <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- GTM: initialise dataLayer, load script only after cookie consent -->
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function loadGTM() {
+      if (window._gtmLoaded) return;
+      window._gtmLoaded = true;
+      (function(w,d,s,l,i){
+        w[l]=w[l]||[];
+        w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s);
+        j.async=true;
+        j.src='https://www.googletagmanager.com/gtm.js?id='+i;
+        f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-KXFR5SZP');
+    }
+    if (localStorage.getItem('integron_cookie_consent') === 'accepted') {
+      loadGTM();
+    }
+    window._loadGTM = loadGTM;
+  </script>
 </head>
 <body class="bg-white font-sans text-brand-ink antialiased dark:bg-brand-ink dark:text-white">
   <slot />
@@ -92,6 +114,7 @@ const {
     function setConsent(value: string) {
       localStorage.setItem(KEY, value);
       (window as any).cookieConsent = value
+      if (value === 'accepted') (window as any)._loadGTM?.()
       hideBanner()
     }
 
