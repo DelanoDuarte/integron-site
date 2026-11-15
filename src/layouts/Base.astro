@@ -44,5 +44,79 @@ const {
 </head>
 <body class="bg-white font-sans text-brand-ink antialiased dark:bg-brand-ink dark:text-white">
   <slot />
+
+  <!-- ── Cookie consent banner ─────────────────────────────────────────── -->
+  <div
+    id="cookie-banner"
+    role="dialog"
+    aria-label="Aviso de cookies"
+    aria-live="polite"
+    class="fixed bottom-0 inset-x-0 z-50 hidden border-t border-white/10 bg-brand-ink px-4 py-4 shadow-2xl dark:border-white/5 sm:px-6"
+  >
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-sm text-slate-300">
+        Usamos cookies para analytics e melhoria do produto.
+        Ao aceitar, você concorda com nossa
+        <a href="/privacy" class="underline hover:text-white transition-colors">Política de Privacidade</a>.
+        Você pode rejeitar cookies não essenciais sem prejuízo ao acesso.
+      </p>
+      <div class="flex shrink-0 gap-3">
+        <button
+          id="cookie-reject"
+          class="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-slate-300 hover:border-white/40 hover:text-white transition-colors"
+        >
+          Apenas essenciais
+        </button>
+        <button
+          id="cookie-accept"
+          class="rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-400 transition-colors"
+        >
+          Aceitar cookies
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const KEY = 'integron_cookie_consent'
+    const banner = document.getElementById('cookie-banner')
+
+    function hideBanner() {
+      if (banner) {
+        banner.style.transform = 'translateY(100%)'
+        banner.style.transition = 'transform 0.3s ease-in'
+        setTimeout(() => banner.style.display = 'none', 320)
+      }
+    }
+
+    function setConsent(value: string) {
+      localStorage.setItem(KEY, value);
+      (window as any).cookieConsent = value
+      hideBanner()
+    }
+
+    // Show banner if no preference stored yet
+    if (!localStorage.getItem(KEY)) {
+      if (banner) {
+        banner.style.display = 'block'
+        // Slight delay so it doesn't flash immediately on load
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            if (banner) {
+              banner.style.transform = 'translateY(0)'
+              banner.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+            }
+          }, 800)
+        })
+        // Start hidden below viewport, then slide up
+        banner.style.transform = 'translateY(100%)'
+      }
+    } else {
+      (window as any).cookieConsent = localStorage.getItem(KEY)
+    }
+
+    document.getElementById('cookie-accept')?.addEventListener('click', () => setConsent('accepted'))
+    document.getElementById('cookie-reject')?.addEventListener('click', () => setConsent('rejected'))
+  </script>
 </body>
 </html>
