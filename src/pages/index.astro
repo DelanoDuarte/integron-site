@@ -133,7 +133,7 @@ import Base from '../layouts/Base.astro'
                 <span class="text-[9px] font-semibold uppercase tracking-wider text-slate-400">Status</span>
               </div>
               <!-- NF-e rows -->
-              <div class="space-y-1.5 overflow-hidden px-4">
+              <div id="nfe-feed" class="space-y-1.5 overflow-hidden px-4">
                 <div class="grid grid-cols-[2fr_1fr_80px] items-center gap-2 rounded-lg border border-red-100 bg-white px-3 py-2.5 [border-left:2px_solid_theme(colors.red.500)] dark:border-red-900/30 dark:bg-brand-800/60">
                   <div>
                     <p class="text-[11px] font-semibold text-slate-800 dark:text-slate-200">NF-e 48.172</p>
@@ -635,6 +635,91 @@ import Base from '../layouts/Base.astro'
       { threshold: 0.12 }
     )
     els.forEach((el) => obs.observe(el))
+  </script>
+
+  <!-- ── NF-e live validation feed ─────────────────────────────────────── -->
+  <script>
+    ;(function () {
+      const feed = document.getElementById('nfe-feed')
+      if (!feed) return
+
+      const pool = [
+        { num: '48.176', fields: 'NCM 8471.30.19 · CFOP 6102',       state: 'ok',    errs: '0 erros'  },
+        { num: '48.177', fields: 'GTIN ausente · CFOP 6949',           state: 'warn',  errs: '1 alerta' },
+        { num: '48.178', fields: 'NCM 3923.90.00 · CSOSN verificado',  state: 'ok',    errs: '0 erros'  },
+        { num: '48.179', fields: 'XSD inválido · CFOP 6109',           state: 'error', errs: '2 erros'  },
+        { num: '48.180', fields: 'NCM · GTIN · CFOP verificados',      state: 'ok',    errs: '0 erros'  },
+        { num: '48.181', fields: 'CSOSN 500 inválido · NCM 7318',      state: 'error', errs: '1 erro'   },
+        { num: '48.182', fields: 'NCM 7616.99.90 · CFOP 6102',        state: 'ok',    errs: '0 erros'  },
+        { num: '48.183', fields: 'IBS ausente · GTIN ok',               state: 'warn',  errs: '1 alerta' },
+        { num: '48.184', fields: 'NCM 8528.72.00 · CFOP 6102',        state: 'ok',    errs: '0 erros'  },
+        { num: '48.185', fields: 'GTIN 7891234567890 inválido',         state: 'error', errs: '1 erro'   },
+      ]
+      const labels = { ok: 'Aprovada', warn: 'Revisão', error: 'Rejeição' }
+      const MAX = 4
+      let idx = 0
+      let timer = null
+
+      function addRow() {
+        const nfe = pool[idx % pool.length]
+        idx++
+
+        // Remove oldest row if at max
+        const rows = feed.querySelectorAll('.nfe-row')
+        if (rows.length >= MAX) {
+          const last = rows[rows.length - 1]
+          last.classList.add('nfe-row-exit')
+          setTimeout(() => { if (last.parentNode) last.remove() }, 300)
+        }
+
+        // Build row in loading state
+        const row = document.createElement('div')
+        row.className = 'nfe-row nfe-row-enter grid grid-cols-[2fr_1fr_80px] items-center gap-2 rounded-lg border border-slate-100 bg-white px-3 py-2.5 dark:border-brand-700/30 dark:bg-brand-800/60'
+        row.dataset.state = 'loading'
+
+        const info = document.createElement('div')
+        info.innerHTML = `<p class="text-[11px] font-semibold text-slate-800 dark:text-slate-200">NF-e ${nfe.num}</p><p class="text-[9px] text-slate-400">${nfe.fields}</p>`
+
+        const errsEl = document.createElement('span')
+        errsEl.className = 'nfe-errs text-[10px] font-medium'
+        errsEl.dataset.state = 'loading'
+        errsEl.textContent = '…'
+
+        const badge = document.createElement('span')
+        badge.className = 'nfe-badge'
+        badge.dataset.state = 'loading'
+        badge.innerHTML = `Validando<span class="nfe-dot"></span><span class="nfe-dot"></span><span class="nfe-dot"></span>`
+
+        row.appendChild(info)
+        row.appendChild(errsEl)
+        row.appendChild(badge)
+        feed.insertBefore(row, feed.firstChild)
+
+        // Flip to final state after 1.3 s
+        setTimeout(() => {
+          row.dataset.state  = nfe.state
+          errsEl.dataset.state = nfe.state
+          errsEl.textContent   = nfe.errs
+          badge.dataset.state  = nfe.state
+          badge.textContent    = labels[nfe.state]
+        }, 1300)
+      }
+
+      // Pause when scrolled out of view — resume when back in
+      const heroObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !timer) {
+            addRow()
+            timer = setInterval(addRow, 2600)
+          } else if (!entry.isIntersecting && timer) {
+            clearInterval(timer)
+            timer = null
+          }
+        })
+      }, { threshold: 0.1 })
+
+      heroObs.observe(feed)
+    })()
   </script>
 
 </Base>
