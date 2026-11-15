@@ -444,40 +444,21 @@ import Base from '../layouts/Base.astro'
         </p>
       </div>
 
-      <!-- Video frame — replace data-video-id with the YouTube/Vimeo ID when ready -->
-      <div class="mt-12 reveal" style="--delay: 80ms" data-video-id="">
-        <div class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-xl shadow-slate-200/60 dark:border-brand-700/40 dark:bg-brand-900/50 dark:shadow-brand-900/40">
-          <!-- 16:9 aspect ratio -->
-          <div class="aspect-video flex flex-col items-center justify-center gap-6 p-8">
-            <!-- Play button -->
-            <button
-              data-play-demo
-              aria-label="Assistir demo"
-              class="flex size-20 items-center justify-center rounded-full bg-brand-700 text-white shadow-lg shadow-brand-900/30 transition-all hover:scale-105 hover:bg-brand-600 hover:shadow-xl"
-            >
-              <svg class="ml-1 size-8" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
-            </button>
-            <div class="text-center">
-              <p class="font-heading text-base font-semibold text-slate-700 dark:text-slate-200">Demo em vídeo</p>
-              <p class="mt-1 text-sm text-slate-400 dark:text-slate-500">Disponível em breve — ou <a href="#contato" class="text-brand-600 underline hover:text-brand-500 dark:text-brand-400">agende uma demo ao vivo</a></p>
-            </div>
-          </div>
-          <!-- Decorative mockup overlay behind the button -->
-          <div aria-hidden="true" class="pointer-events-none absolute inset-0 opacity-[0.04] dark:opacity-[0.06]"
-            style="background: repeating-linear-gradient(0deg, currentColor 0, currentColor 1px, transparent 1px, transparent 32px), repeating-linear-gradient(90deg, currentColor 0, currentColor 1px, transparent 1px, transparent 32px)">
-          </div>
+      <!-- Vimeo embed -->
+      <div class="mt-12 reveal overflow-hidden rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60 dark:border-brand-700/40 dark:shadow-brand-900/40" style="--delay: 80ms">
+        <div style="padding:56.25% 0 0 0;position:relative;">
+          <iframe src="https://player.vimeo.com/video/1247038242?autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Integron Demo"></iframe>
         </div>
       </div>
+      <script src="https://player.vimeo.com/api/player.js"></script>
 
       <!-- CTA row below video -->
       <div class="mt-8 flex flex-wrap justify-center gap-4 reveal" style="--delay: 160ms">
         <a href="#contato" class="rounded-lg bg-brand-700 px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand-800 transition-colors shadow-sm">
-          Agendar demo ao vivo
+          Solicitar diagnóstico gratuito
         </a>
-        <a href="#como-funciona" class="rounded-lg border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 hover:border-brand-300 hover:text-brand-700 dark:border-white/10 dark:bg-white/5 dark:text-white transition-all">
-          Ver como funciona →
+        <a href="#precos" class="rounded-lg border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 hover:border-brand-300 hover:text-brand-700 dark:border-white/10 dark:bg-white/5 dark:text-white transition-all">
+          Ver planos →
         </a>
       </div>
     </div>
