@@ -15,9 +15,10 @@ const {
 <html lang="pt-BR" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
 
   <!-- Favicons & PWA -->
   <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -76,25 +77,25 @@ const {
     role="dialog"
     aria-label="Aviso de cookies"
     aria-live="polite"
-    class="fixed bottom-0 inset-x-0 z-50 hidden border-t border-white/10 bg-brand-ink px-4 py-4 shadow-2xl dark:border-white/5 sm:px-6"
+    class="fixed bottom-0 inset-x-0 z-50 hidden border-t border-white/10 bg-brand-ink px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-2xl dark:border-white/5 sm:px-6"
   >
-    <div class="mx-auto flex max-w-6xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div class="mx-auto flex max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       <p class="text-sm text-slate-300">
         Usamos cookies para analytics e melhoria do produto.
         Ao aceitar, você concorda com nossa
         <a href="/privacy" class="underline hover:text-white transition-colors">Política de Privacidade</a>.
         Você pode rejeitar cookies não essenciais sem prejuízo ao acesso.
       </p>
-      <div class="flex shrink-0 gap-3">
+      <div class="grid shrink-0 grid-cols-2 gap-2 sm:flex">
         <button
           id="cookie-reject"
-          class="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-slate-300 hover:border-white/40 hover:text-white transition-colors"
+          class="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-slate-300 hover:border-white/40 hover:text-white transition-colors"
         >
           Apenas essenciais
         </button>
         <button
           id="cookie-accept"
-          class="rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-400 transition-colors"
+          class="inline-flex min-h-11 items-center justify-center rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-400 transition-colors"
         >
           Aceitar cookies
         </button>
