@@ -5,10 +5,10 @@ import Base from '../layouts/Base.astro'
 
   <!-- ── Nav ──────────────────────────────────────────────────────────── -->
   <header class="sticky top-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md dark:border-white/8 dark:bg-brand-ink/90">
-    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-      <a href="/" aria-label="Integron">
-        <img src="/brand/integron-logo.svg" alt="Integron" class="h-8 w-auto dark:hidden" />
-        <img src="/brand/integron-logo-dark.svg" alt="Integron" class="hidden h-8 w-auto dark:block" />
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
+      <a href="/" aria-label="Integron" class="inline-flex min-h-11 items-center">
+        <img src="/brand/integron-logo.svg" alt="Integron" width="140" height="32" class="h-8 w-auto dark:hidden sm:h-9" />
+        <img src="/brand/integron-logo-dark.svg" alt="Integron" width="140" height="32" class="hidden h-8 w-auto dark:block sm:h-9" />
       </a>
       <nav class="hidden items-center gap-8 text-sm font-medium text-slate-500 dark:text-slate-300 md:flex">
         <a href="#o-problema" class="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">O Problema</a>
@@ -16,45 +16,125 @@ import Base from '../layouts/Base.astro'
         <a href="#como-funciona" class="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Como funciona</a>
         <a href="#precos" class="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Preços</a>
       </nav>
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 sm:gap-3">
         <button data-theme-toggle aria-label="Alternar tema"
-          class="rounded-lg p-2 text-slate-400 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors">
+          class="inline-flex size-11 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors">
           <svg class="hidden size-4.5 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
           <svg class="size-4.5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
-        <a href="#contato" class="rounded-lg bg-brand-700 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-800 transition-colors">
+        <a href="#contato" class="hidden rounded-lg bg-brand-700 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-800 transition-colors md:inline-flex">
           Falar com vendas
         </a>
+        <!-- Mobile CTA + menu toggle (H-03) -->
+        <a href="#contato" class="inline-flex min-h-11 items-center rounded-lg bg-brand-700 px-3.5 text-sm font-semibold text-white hover:bg-brand-800 transition-colors md:hidden">
+          Contato
+        </a>
+        <button
+          id="menu-toggle"
+          type="button"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          class="inline-flex size-11 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10 transition-colors md:hidden"
+        >
+          <svg id="menu-icon-open" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg id="menu-icon-close" class="hidden size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
       </div>
     </div>
+
+    <!-- Mobile menu panel (H-01, PA-06) -->
+    <div id="mobile-menu" hidden class="border-t border-slate-100 bg-white dark:border-white/8 dark:bg-brand-ink md:hidden">
+      <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2 text-base font-medium text-slate-600 dark:text-slate-200">
+        <a href="#o-problema" class="menu-link flex min-h-11 items-center py-3 hover:text-brand-700 dark:hover:text-brand-300 transition-colors">O Problema</a>
+        <a href="#funcionalidades" class="menu-link flex min-h-11 items-center py-3 hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Funcionalidades</a>
+        <a href="#como-funciona" class="menu-link flex min-h-11 items-center py-3 hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Como funciona</a>
+        <a href="#precos" class="menu-link flex min-h-11 items-center py-3 hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Preços</a>
+        <a href="#contato" class="menu-link mt-2 mb-3 inline-flex min-h-11 items-center justify-center rounded-lg bg-brand-700 px-4 py-3 font-semibold text-white hover:bg-brand-800 transition-colors">
+          Falar com vendas
+        </a>
+      </nav>
+    </div>
   </header>
+
+  <!-- ── Mobile menu behaviour (H-01, PA-06) ───────────────────────────── -->
+  <script>
+    ;(function () {
+      const toggle = document.getElementById('menu-toggle')
+      const panel  = document.getElementById('mobile-menu')
+      const iconOpen  = document.getElementById('menu-icon-open')
+      const iconClose = document.getElementById('menu-icon-close')
+      if (!toggle || !panel) return
+
+      let lastFocus: HTMLElement | null = null
+
+      function open() {
+        if (!panel || !toggle) return
+        lastFocus = document.activeElement as HTMLElement
+        panel.hidden = false
+        toggle.setAttribute('aria-expanded', 'true')
+        toggle.setAttribute('aria-label', 'Fechar menu')
+        iconOpen?.classList.add('hidden')
+        iconClose?.classList.remove('hidden')
+        const first = panel.querySelector<HTMLElement>('a, button')
+        first?.focus()
+      }
+
+      function close(restore = true) {
+        if (!panel || !toggle) return
+        panel.hidden = true
+        toggle.setAttribute('aria-expanded', 'false')
+        toggle.setAttribute('aria-label', 'Abrir menu')
+        iconClose?.classList.add('hidden')
+        iconOpen?.classList.remove('hidden')
+        if (restore) (lastFocus ?? toggle).focus()
+      }
+
+      toggle.addEventListener('click', () => {
+        panel.hidden ? open() : close()
+      })
+
+      panel.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', () => close(false))
+      })
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !panel.hidden) close()
+      })
+
+      // Close when resizing up to the desktop breakpoint
+      window.matchMedia('(min-width: 768px)').addEventListener('change', e => {
+        if (e.matches && !panel.hidden) close(false)
+      })
+    })()
+  </script>
 
   <!-- ── Hero ─────────────────────────────────────────────────────────── -->
   <section class="relative overflow-hidden bg-white dark:bg-brand-ink">
     <!-- Subtle radial gradient only -->
     <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-96 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,theme(colors.brand-100/50),transparent)] dark:bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,theme(colors.brand-900/40),transparent)]"></div>
 
-    <div class="relative mx-auto max-w-6xl px-6 pt-20 pb-0">
+    <div class="relative mx-auto max-w-6xl px-4 pt-16 pb-0 sm:px-6 sm:pt-20 lg:px-8">
       <!-- Centered copy -->
       <div class="mx-auto max-w-3xl text-center">
         <div class="animate-fade-up">
-          <span class="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3.5 py-1.5 text-xs font-semibold text-brand-700 dark:border-brand-700 dark:bg-brand-900/50 dark:text-brand-300">
-            <span class="size-1.5 rounded-full bg-brand-500 animate-pulse"></span>
+          <span class="inline-flex max-w-full items-center gap-2 whitespace-normal rounded-full border border-brand-200 bg-brand-50 px-3.5 py-1.5 text-xs font-semibold text-brand-700 dark:border-brand-700 dark:bg-brand-900/50 dark:text-brand-300">
+            <span class="size-1.5 shrink-0 rounded-full bg-brand-500 animate-pulse"></span>
             Validação pré-SEFAZ — IBS e CBS em roadmap
           </span>
         </div>
-        <h1 class="mt-6 font-heading text-5xl font-bold leading-[1.1] tracking-tight text-brand-ink dark:text-white md:text-[3.5rem] animate-fade-up" style="animation-delay: 80ms">
-          Pare rejeições de NF-e<br class="hidden sm:block"/>
+        <h1 class="mt-6 font-heading text-3xl font-bold leading-[1.1] tracking-tight text-balance text-brand-ink dark:text-white sm:text-5xl lg:text-6xl animate-fade-up" style="animation-delay: 80ms">
+          Pare rejeições de NF&#8209;e<br/>
           <span class="text-gradient">antes que aconteçam</span>
         </h1>
-        <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-slate-500 dark:text-slate-400 animate-fade-up" style="animation-delay: 160ms">
+        <p class="mx-auto mt-6 max-w-xl text-base leading-relaxed text-slate-500 dark:text-slate-400 sm:text-lg animate-fade-up" style="animation-delay: 160ms">
           Valide NCM, CFOP, GTIN e regras fiscais automaticamente antes de transmitir à SEFAZ — sem mudar de ERP, sem analistas em modo firefighting.
         </p>
-        <div class="mt-8 flex flex-wrap justify-center gap-3 animate-fade-up" style="animation-delay: 240ms">
-          <a href="#contato" class="rounded-lg bg-brand-700 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-900/20 hover:bg-brand-800 hover:-translate-y-px transition-all">
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center animate-fade-up" style="animation-delay: 240ms">
+          <a href="#contato" class="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-brand-700 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-900/20 hover:bg-brand-800 hover:-translate-y-px transition-all sm:w-auto">
             Solicitar diagnóstico gratuito
           </a>
-          <a href="#como-funciona" class="rounded-lg border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 hover:border-brand-300 hover:text-brand-700 dark:border-white/10 dark:bg-white/5 dark:text-white transition-all">
+          <a href="#como-funciona" class="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 hover:border-brand-300 hover:text-brand-700 dark:border-white/10 dark:bg-white/5 dark:text-white transition-all sm:w-auto">
             Como funciona →
           </a>
         </div>
@@ -62,15 +142,15 @@ import Base from '../layouts/Base.astro'
 
       <!-- Product mockup (centered, below CTAs) -->
       <div class="relative mt-14 animate-fade-up" style="animation-delay: 200ms">
-        <div class="mx-auto max-w-4xl overflow-hidden rounded-xl border border-slate-200/80 shadow-2xl shadow-slate-900/10 dark:border-brand-700/40 dark:shadow-brand-900/40">
+        <div role="img" aria-label="Painel de validações de NF-e do Integron, mostrando notas aprovadas, em revisão e rejeitadas em tempo real" class="mx-auto max-w-4xl overflow-hidden rounded-xl border border-slate-200/80 shadow-2xl shadow-slate-900/10 dark:border-brand-700/40 dark:shadow-brand-900/40">
           <!-- Browser chrome -->
-          <div class="flex items-center gap-3 border-b border-slate-200/60 bg-slate-50 px-4 py-2.5 dark:border-brand-700/40 dark:bg-brand-900">
+          <div aria-hidden="true" class="flex items-center gap-3 border-b border-slate-200/60 bg-slate-50 px-4 py-2.5 dark:border-brand-700/40 dark:bg-brand-900">
             <div class="flex gap-1.5">
               <span class="size-2.5 rounded-full bg-red-400/70"></span>
               <span class="size-2.5 rounded-full bg-amber-400/70"></span>
               <span class="size-2.5 rounded-full bg-green-400/70"></span>
             </div>
-            <div class="flex-1 rounded bg-white/70 px-3 py-1 font-mono text-[11px] text-slate-400 dark:bg-brand-800/60 dark:text-slate-500">
+            <div class="min-w-0 flex-1 truncate rounded bg-white/70 px-3 py-1 font-mono text-[11px] text-slate-400 dark:bg-brand-800/60 dark:text-slate-500">
               app.integron.com.br/validacoes
             </div>
             <div class="flex items-center gap-1.5">
@@ -79,9 +159,9 @@ import Base from '../layouts/Base.astro'
             </div>
           </div>
           <!-- App shell -->
-          <div class="flex" style="height: 400px">
-            <!-- Sidebar -->
-            <div class="flex w-14 shrink-0 flex-col items-center gap-3.5 bg-brand-800 pb-4 pt-4 dark:bg-brand-900">
+          <div aria-hidden="true" class="flex h-[360px] sm:h-[400px]">
+            <!-- Sidebar (hidden on phones) -->
+            <div class="hidden w-14 shrink-0 flex-col items-center gap-3.5 bg-brand-800 pb-4 pt-4 dark:bg-brand-900 sm:flex">
               <img src="/brand/integron-mark-dark.svg" alt="" class="mb-2 h-6 w-auto" />
               <div class="flex size-8 items-center justify-center rounded-lg bg-brand-700">
                 <img src="/icons/list-checks.svg" alt="" class="size-4 invert opacity-90" />
@@ -93,7 +173,7 @@ import Base from '../layouts/Base.astro'
               <img src="/icons/settings.svg" alt="" class="mt-auto size-4 invert opacity-35" />
             </div>
             <!-- Main content -->
-            <div class="flex flex-1 flex-col overflow-hidden bg-slate-50 dark:bg-brand-900/50">
+            <div class="flex min-w-0 flex-1 flex-col overflow-hidden bg-slate-50 dark:bg-brand-900/50">
               <!-- Top bar -->
               <div class="flex shrink-0 items-center justify-between border-b border-slate-100 bg-white px-5 py-3 dark:border-brand-700/40 dark:bg-brand-800/80">
                 <div>
@@ -171,7 +251,7 @@ import Base from '../layouts/Base.astro'
   </section>
 
   <!-- ── Integrations strip ──────────────────────────────────────────────── -->
-  <section class="border-b border-slate-100 bg-white px-6 py-12 dark:border-white/5 dark:bg-brand-ink">
+  <section class="border-b border-slate-100 bg-white px-4 py-12 dark:border-white/5 dark:bg-brand-ink sm:px-6 lg:px-8">
     <div class="mx-auto max-w-5xl">
       <p class="mb-8 text-center text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 reveal">
         Integra com os principais ERPs do mercado brasileiro
@@ -200,25 +280,25 @@ import Base from '../layouts/Base.astro'
   </section>
 
   <!-- ── Stats strip ───────────────────────────────────────────────────── -->
-  <section class="border-y border-slate-100 bg-slate-50 px-6 py-14 dark:border-white/5 dark:bg-white/3">
-    <div class="mx-auto grid max-w-5xl grid-cols-1 gap-10 sm:grid-cols-3">
-      <div class="text-center reveal">
-        <p class="font-heading text-4xl font-bold text-brand-700 dark:text-brand-400">&lt; 1 s</p>
+  <section class="border-y border-slate-100 bg-slate-50 px-4 py-12 dark:border-white/5 dark:bg-white/3 sm:px-6 sm:py-14 lg:px-8">
+    <div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 divide-y divide-slate-200/70 sm:grid-cols-3 sm:gap-10 sm:divide-y-0 dark:divide-white/10">
+      <div class="pt-6 text-center reveal sm:pt-0">
+        <p class="font-heading text-4xl font-bold text-brand-700 dark:text-brand-400 whitespace-nowrap">&lt; 1 s</p>
         <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">resposta da API de validação pré-SEFAZ</p>
       </div>
-      <div class="text-center reveal" style="--delay: 100ms">
-        <p class="font-heading text-4xl font-bold text-brand-700 dark:text-brand-400">1–3 h</p>
+      <div class="pt-6 text-center reveal sm:pt-0" style="--delay: 100ms">
+        <p class="font-heading text-4xl font-bold text-brand-700 dark:text-brand-400 whitespace-nowrap">1–3 h</p>
         <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">de analista fiscal para corrigir cada rejeição manualmente</p>
       </div>
-      <div class="text-center reveal" style="--delay: 200ms">
-        <p class="font-heading text-4xl font-bold text-brand-700 dark:text-brand-400">R$ 200 mil</p>
+      <div class="pt-6 text-center reveal sm:pt-0" style="--delay: 200ms">
+        <p class="font-heading text-4xl font-bold text-brand-700 dark:text-brand-400 whitespace-nowrap">R$ 200 mil</p>
         <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">de capital de giro bloqueado em 48 h para quem fatura R$ 10 M/mês</p>
       </div>
     </div>
   </section>
 
   <!-- ── Pain points ───────────────────────────────────────────────────── -->
-  <section id="o-problema" class="bg-white px-6 py-24 dark:bg-brand-ink">
+  <section id="o-problema" class="scroll-mt-20 bg-white px-4 py-12 dark:bg-brand-ink sm:px-6 sm:py-16 lg:px-8 lg:py-24">
     <div class="mx-auto max-w-6xl">
       <div class="text-center reveal">
         <p class="text-xs font-semibold uppercase tracking-widest text-brand-500 dark:text-brand-400">O problema</p>
@@ -233,7 +313,7 @@ import Base from '../layouts/Base.astro'
       <div class="mt-14 grid gap-5 lg:grid-cols-3">
 
         <!-- 01 · Multas -->
-        <div class="reveal group rounded-2xl border border-slate-200 bg-white p-7 card-glow transition-all hover:-translate-y-0.5 dark:border-brand-700/30 dark:bg-brand-ink" style="--delay: 50ms">
+        <div class="reveal group rounded-2xl border border-slate-200 bg-white p-5 card-glow transition-all hover:-translate-y-0.5 sm:p-7 dark:border-brand-700/30 dark:bg-brand-ink" style="--delay: 50ms">
           <div class="flex items-start justify-between gap-2">
             <span class="select-none font-heading text-6xl font-bold leading-none text-red-100 dark:text-red-900/50">01</span>
             <span class="mt-1 shrink-0 rounded-full border border-red-200 bg-red-50 px-2.5 py-1 text-xs font-semibold text-red-600 dark:border-red-800/50 dark:bg-red-950/40 dark:text-red-400">Risco fiscal</span>
@@ -251,7 +331,7 @@ import Base from '../layouts/Base.astro'
         </div>
 
         <!-- 02 · Retrabalho -->
-        <div class="reveal group rounded-2xl border border-slate-200 bg-white p-7 card-glow transition-all hover:-translate-y-0.5 dark:border-brand-700/30 dark:bg-brand-ink" style="--delay: 150ms">
+        <div class="reveal group rounded-2xl border border-slate-200 bg-white p-5 card-glow transition-all hover:-translate-y-0.5 sm:p-7 dark:border-brand-700/30 dark:bg-brand-ink" style="--delay: 150ms">
           <div class="flex items-start justify-between gap-2">
             <span class="select-none font-heading text-6xl font-bold leading-none text-amber-100 dark:text-amber-900/50">02</span>
             <span class="mt-1 shrink-0 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-700 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-400">Produtividade</span>
@@ -282,7 +362,7 @@ import Base from '../layouts/Base.astro'
         </div>
 
         <!-- 03 · Cascata -->
-        <div class="reveal group rounded-2xl border border-slate-200 bg-white p-7 card-glow transition-all hover:-translate-y-0.5 dark:border-brand-700/30 dark:bg-brand-ink" style="--delay: 250ms">
+        <div class="reveal group rounded-2xl border border-slate-200 bg-white p-5 card-glow transition-all hover:-translate-y-0.5 sm:p-7 dark:border-brand-700/30 dark:bg-brand-ink" style="--delay: 250ms">
           <div class="flex items-start justify-between gap-2">
             <span class="select-none font-heading text-6xl font-bold leading-none text-orange-100 dark:text-orange-900/50">03</span>
             <span class="mt-1 shrink-0 rounded-full border border-orange-200 bg-orange-50 px-2.5 py-1 text-xs font-semibold text-orange-700 dark:border-orange-800/50 dark:bg-orange-950/40 dark:text-orange-400">Impacto em cascata</span>
@@ -325,7 +405,7 @@ import Base from '../layouts/Base.astro'
   </section>
 
   <!-- ── How it works ──────────────────────────────────────────────────── -->
-  <section id="como-funciona" class="bg-slate-50 px-6 py-24 dark:bg-white/3">
+  <section id="como-funciona" class="scroll-mt-20 bg-slate-50 px-4 py-12 dark:bg-white/3 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
     <div class="mx-auto max-w-6xl">
       <div class="text-center reveal">
         <p class="text-xs font-semibold uppercase tracking-widest text-brand-500 dark:text-brand-400">Como funciona</p>
@@ -360,7 +440,7 @@ import Base from '../layouts/Base.astro'
 
         <!-- Diagnostic report mockup -->
         <div class="mt-14 lg:mt-0 lg:w-1/2 reveal" style="--delay: 100ms">
-          <div class="rounded-2xl border border-slate-200 bg-white shadow-lg dark:border-brand-700/40 dark:bg-brand-800/80">
+          <div role="img" aria-label="Exemplo de relatório de diagnóstico de uma NF-e com score de rejeição de 87% e três achados: NCM inválido, CFOP incompatível e campo IBS ausente" class="rounded-2xl border border-slate-200 bg-white shadow-lg dark:border-brand-700/40 dark:bg-brand-800/80">
             <div class="border-b border-slate-100 px-5 py-4 dark:border-brand-700/40">
               <div class="flex items-center justify-between">
                 <div>
@@ -432,7 +512,7 @@ import Base from '../layouts/Base.astro'
   </section>
 
   <!-- ── Demo video ───────────────────────────────────────────────────── -->
-  <section id="demo" class="bg-white px-6 py-24 dark:bg-brand-ink">
+  <section id="demo" class="scroll-mt-20 bg-white px-4 py-12 dark:bg-brand-ink sm:px-6 sm:py-16 lg:px-8 lg:py-24">
     <div class="mx-auto max-w-4xl">
       <div class="text-center reveal">
         <p class="text-xs font-semibold uppercase tracking-widest text-brand-500 dark:text-brand-400">Demo</p>
@@ -444,20 +524,58 @@ import Base from '../layouts/Base.astro'
         </p>
       </div>
 
-      <!-- Vimeo embed -->
+      <!-- Vimeo embed — lite facade on phones, autoplay only from md up (V-01, V-02) -->
       <div class="mt-12 reveal overflow-hidden rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60 dark:border-brand-700/40 dark:shadow-brand-900/40" style="--delay: 80ms">
-        <div style="padding:56.25% 0 0 0;position:relative;">
-          <iframe src="https://player.vimeo.com/video/1247038242?autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Integron Demo"></iframe>
+        <div id="demo-video" class="relative aspect-video w-full bg-brand-900" data-video-id="1247038242">
+          <button
+            id="demo-video-play"
+            type="button"
+            aria-label="Reproduzir vídeo de demonstração do Integron"
+            class="group absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-brand-800 to-brand-ink"
+          >
+            <span class="flex size-16 items-center justify-center rounded-full bg-white/95 shadow-lg transition-transform group-hover:scale-105">
+              <svg class="ml-1 size-7 text-brand-700" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            <span class="text-sm font-semibold text-white">Ver demonstração</span>
+          </button>
         </div>
       </div>
-      <script src="https://player.vimeo.com/api/player.js"></script>
+      <script>
+        ;(function () {
+          const holder = document.getElementById('demo-video')
+          const btn = document.getElementById('demo-video-play')
+          if (!holder || !btn) return
+          const id = holder.dataset.videoId
 
-      <!-- CTA row below video -->
-      <div class="mt-8 flex flex-wrap justify-center gap-4 reveal" style="--delay: 160ms">
-        <a href="#contato" class="rounded-lg bg-brand-700 px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand-800 transition-colors shadow-sm">
+          function loadIframe(autoplay: boolean) {
+            const params = autoplay
+              ? 'autoplay=1&muted=1&loop=1&autopause=0'
+              : 'autoplay=1&autopause=0'
+            const iframe = document.createElement('iframe')
+            iframe.src = `https://player.vimeo.com/video/${id}?${params}&player_id=0&app_id=58479`
+            iframe.className = 'absolute inset-0 h-full w-full'
+            iframe.setAttribute('frameborder', '0')
+            iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share')
+            iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin')
+            iframe.title = 'Integron Demo'
+            holder.replaceChildren(iframe)
+          }
+
+          btn.addEventListener('click', () => loadIframe(false))
+
+          // Autoplay only from md up and when reduced motion is not requested (V-02, PA-07)
+          const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          const desktop = window.matchMedia('(min-width: 768px)').matches
+          if (desktop && !reduced) loadIframe(true)
+        })()
+      </script>
+
+      <!-- CTA row below video (V-03) -->
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center reveal" style="--delay: 160ms">
+        <a href="#contato" class="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-brand-700 px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand-800 transition-colors shadow-sm sm:w-auto">
           Solicitar diagnóstico gratuito
         </a>
-        <a href="#precos" class="rounded-lg border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 hover:border-brand-300 hover:text-brand-700 dark:border-white/10 dark:bg-white/5 dark:text-white transition-all">
+        <a href="#precos" class="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 hover:border-brand-300 hover:text-brand-700 dark:border-white/10 dark:bg-white/5 dark:text-white transition-all sm:w-auto">
           Ver planos →
         </a>
       </div>
@@ -465,7 +583,7 @@ import Base from '../layouts/Base.astro'
   </section>
 
   <!-- ── Features ─────────────────────────────────────────────────────── -->
-  <section id="funcionalidades" class="bg-white px-6 py-24 dark:bg-brand-ink">
+  <section id="funcionalidades" class="scroll-mt-20 bg-white px-4 py-12 dark:bg-brand-ink sm:px-6 sm:py-16 lg:px-8 lg:py-24">
     <div class="mx-auto max-w-6xl">
       <div class="text-center reveal">
         <p class="text-xs font-semibold uppercase tracking-widest text-brand-500 dark:text-brand-400">Funcionalidades</p>
@@ -516,7 +634,7 @@ import Base from '../layouts/Base.astro'
             tags: null,
           },
         ].map((f, i) => (
-          <div class="reveal group rounded-2xl border border-slate-200 bg-white p-7 card-glow transition-all hover:-translate-y-0.5 dark:border-brand-700/30 dark:bg-brand-ink" style={`--delay: ${i * 60}ms`}>
+          <div class="reveal group rounded-2xl border border-slate-200 bg-white p-5 card-glow transition-all hover:-translate-y-0.5 sm:p-7 dark:border-brand-700/30 dark:bg-brand-ink" style={`--delay: ${i * 60}ms`}>
             <div class="flex size-11 items-center justify-center rounded-xl bg-brand-50 transition-colors group-hover:bg-brand-100 dark:bg-brand-900/40">
               <svg class="size-5 text-brand-600 dark:text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" set:html={f.icon} />
             </div>
@@ -536,7 +654,7 @@ import Base from '../layouts/Base.astro'
   </section>
 
   <!-- ── Pricing ───────────────────────────────────────────────────────── -->
-  <section id="precos" class="bg-slate-50 px-6 py-24 dark:bg-white/3">
+  <section id="precos" class="scroll-mt-20 bg-slate-50 px-4 py-12 dark:bg-white/3 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
     <div class="mx-auto max-w-6xl">
       <div class="text-center reveal">
         <p class="text-xs font-semibold uppercase tracking-widest text-brand-500 dark:text-brand-400">Planos</p>
@@ -547,7 +665,7 @@ import Base from '../layouts/Base.astro'
           Fale com a gente para receber uma proposta baseada no seu volume de NF-e e número de CNPJs.
         </p>
       </div>
-      <div class="mt-14 grid gap-6 md:grid-cols-3">
+      <div class="mx-auto mt-14 grid max-w-md gap-6 lg:max-w-none lg:grid-cols-3">
 
         <!-- Starter -->
         <div class="reveal rounded-2xl border border-slate-200 bg-white p-8 card-glow dark:border-brand-700/30 dark:bg-brand-ink">
@@ -565,8 +683,8 @@ import Base from '../layouts/Base.astro'
           <a href="#contato" class="mt-8 block w-full rounded-lg bg-brand-700 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-brand-800 transition-colors">Solicitar proposta</a>
         </div>
 
-        <!-- Business -->
-        <div class="reveal relative rounded-2xl bg-brand-700 p-8 shadow-2xl shadow-brand-900/30 text-white" style="--delay: 100ms">
+        <!-- Business (shown first on mobile, middle on desktop — PR-03) -->
+        <div class="reveal relative order-first rounded-2xl bg-brand-700 p-8 shadow-2xl shadow-brand-900/30 text-white lg:order-none" style="--delay: 100ms">
           <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
             <span class="rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700">Mais completo</span>
           </div>
@@ -609,9 +727,9 @@ import Base from '../layouts/Base.astro'
   </section>
 
   <!-- ── CTA / Contact ────────────────────────────────────────────────── -->
-  <section id="contato" class="bg-brand-ink px-6 py-24 dark:bg-brand-900">
+  <section id="contato" class="scroll-mt-20 bg-brand-ink px-4 py-12 dark:bg-brand-900 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
     <div class="mx-auto max-w-2xl text-center">
-      <img src="/brand/integron-mark-dark.svg" alt="" aria-hidden="true" class="mx-auto mb-8 h-12 w-auto reveal" />
+      <img src="/brand/integron-mark-dark.svg" alt="" aria-hidden="true" width="48" height="48" class="mx-auto mb-8 h-12 w-auto reveal" />
       <h2 class="font-heading text-3xl font-bold tracking-tight text-white md:text-4xl reveal">
         Veja o Integron nos seus dados
       </h2>
@@ -623,9 +741,9 @@ import Base from '../layouts/Base.astro'
         <input type="hidden" name="access_key" value={import.meta.env.WEB3FORMS_ACCESS_KEY} />
         <input type="hidden" name="subject" value="Diagnóstico gratuito — Integron" />
         <input type="email" name="email" required placeholder="seu@empresa.com.br"
-          class="w-full rounded-lg border border-white/15 bg-white/10 px-4 py-2.5 text-sm text-white placeholder:text-brand-400 focus:border-brand-400 focus:outline-none focus:ring-1 focus:ring-brand-400 sm:w-72" />
+          class="min-h-11 w-full rounded-lg border border-white/15 bg-white/10 px-4 py-2.5 text-base text-white placeholder:text-brand-400 focus:border-brand-400 focus:outline-none focus:ring-1 focus:ring-brand-400 sm:w-72" />
         <button type="submit" id="contact-submit"
-          class="rounded-lg bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-400 transition-colors whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed">
+          class="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-400 transition-colors whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed sm:w-auto">
           Solicitar diagnóstico
         </button>
       </form>
@@ -666,19 +784,21 @@ import Base from '../layouts/Base.astro'
   </section>
 
   <!-- ── Footer ───────────────────────────────────────────────────────── -->
-  <footer class="border-t border-slate-100 bg-white px-6 py-10 dark:border-white/8 dark:bg-brand-ink">
-    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6">
-      <img src="/brand/integron-logo.svg" alt="Integron" class="h-7 w-auto dark:hidden" />
-      <img src="/brand/integron-logo-dark.svg" alt="Integron" class="hidden h-7 w-auto dark:block" />
+  <footer class="border-t border-slate-100 bg-white px-4 py-10 dark:border-white/8 dark:bg-brand-ink sm:px-6 lg:px-8">
+    <div class="mx-auto flex max-w-6xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <a href="/" aria-label="Integron" class="inline-flex min-h-11 items-center">
+        <img src="/brand/integron-logo.svg" alt="Integron" width="123" height="28" class="h-7 w-auto dark:hidden" />
+        <img src="/brand/integron-logo-dark.svg" alt="Integron" width="123" height="28" class="hidden h-7 w-auto dark:block" />
+      </a>
       <p class="text-xs text-slate-400 dark:text-slate-500">
         © {new Date().getFullYear()} Integron. Todos os direitos reservados.
       </p>
-      <nav class="flex gap-6 text-xs text-slate-400 dark:text-slate-500">
-        <a href="#o-problema" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">O Problema</a>
-        <a href="#funcionalidades" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Funcionalidades</a>
-        <a href="#precos" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Preços</a>
-        <a href="/privacy" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Privacidade</a>
-        <a href="#contato" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Contato</a>
+      <nav class="grid grid-cols-2 gap-x-6 text-xs text-slate-400 dark:text-slate-500 sm:flex sm:gap-6">
+        <a href="#o-problema" class="inline-flex min-h-11 items-center hover:text-brand-600 dark:hover:text-brand-400 transition-colors sm:min-h-0">O Problema</a>
+        <a href="#funcionalidades" class="inline-flex min-h-11 items-center hover:text-brand-600 dark:hover:text-brand-400 transition-colors sm:min-h-0">Funcionalidades</a>
+        <a href="#precos" class="inline-flex min-h-11 items-center hover:text-brand-600 dark:hover:text-brand-400 transition-colors sm:min-h-0">Preços</a>
+        <a href="/privacy" class="inline-flex min-h-11 items-center hover:text-brand-600 dark:hover:text-brand-400 transition-colors sm:min-h-0">Privacidade</a>
+        <a href="#contato" class="inline-flex min-h-11 items-center hover:text-brand-600 dark:hover:text-brand-400 transition-colors sm:min-h-0">Contato</a>
       </nav>
     </div>
   </footer>
