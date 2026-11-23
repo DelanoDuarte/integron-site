@@ -22,7 +22,7 @@ npm run dev            # http://localhost:4321
 | Variable | Required | Description |
 |---|---|---|
 | `WEB3FORMS_ACCESS_KEY` | Yes | UUID from your Web3Forms dashboard |
-| `PUBLIC_SITE_URL` | Recommended | Canonical URL for og:image (e.g. `https://integron.com.br`) |
+| `PUBLIC_SITE_URL` | Recommended | Canonical URL for og:image (e.g. `https://integronhub.com.br`) |
 
 Set both in **Railway → Variables** before deploying to production.
 

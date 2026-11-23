@@ -10,6 +10,49 @@ const {
   title = 'Integron — Conformidade Fiscal para o Brasil Moderno',
   description = 'Detecte riscos em NF-e antes da transmissão. Validação automática de NCM, CFOP, GTIN e regras IBS/CBS para empresas que não podem errar.',
 } = Astro.props
+
+// Build format is "file" (privacy.html), so normalise the pathname to the
+// clean, slash-free form the sitemap uses: "/" and "/privacy".
+const cleanPath =
+  Astro.url.pathname
+    .replace(/index\.html$/, '')
+    .replace(/\.html$/, '')
+    .replace(/\/$/, '') || '/'
+const canonicalURL = new URL(cleanPath, Astro.site).href
+const ogImage = new URL('/brand/integron-logo@2x.png', Astro.site).href
+const siteName = 'Integron'
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': new URL('/#organization', Astro.site).href,
+      name: siteName,
+      url: Astro.site?.href,
+      logo: new URL('/brand/integron-logo@2x.png', Astro.site).href,
+      email: 'contato@integronhub.com.br',
+    },
+    {
+      '@type': 'WebSite',
+      '@id': new URL('/#website', Astro.site).href,
+      url: Astro.site?.href,
+      name: siteName,
+      inLanguage: 'pt-BR',
+      publisher: { '@id': new URL('/#organization', Astro.site).href },
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: siteName,
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      inLanguage: 'pt-BR',
+      description:
+        'Plataforma de conformidade fiscal para NF-e: validação automática de NCM, CFOP, GTIN e regras IBS/CBS.',
+      publisher: { '@id': new URL('/#organization', Astro.site).href },
+    },
+  ],
+}
 ---
 <!doctype html>
 <html lang="pt-BR" class="scroll-smooth">
@@ -18,7 +61,7 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+  <link rel="canonical" href={canonicalURL} />
 
   <!-- Favicons & PWA -->
   <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -47,8 +90,17 @@ const {
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content={new URL('/brand/integron-logo@2x.png', Astro.site).href} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:image" content={ogImage} />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Structured data -->
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>
 
   <!-- GTM: initialise dataLayer, load script only after cookie consent -->
   <script is:inline>

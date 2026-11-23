@@ -4,7 +4,9 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: process.env.PUBLIC_SITE_URL ?? 'https://integron.com.br',
+  site: process.env.PUBLIC_SITE_URL ?? 'https://integronhub.com.br',
+  trailingSlash: 'never',
+  build: { format: 'file' },
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
